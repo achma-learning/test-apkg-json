@@ -201,11 +201,7 @@ footer.site {
 .cardbox {
   width: 100%;
   max-width: 900px;
-  background:
-    linear-gradient(rgba(14,16,21,.72), rgba(14,16,21,.86)),
-    url("../media/_shared/_ankibackground11.jpg");
-  background-size: cover, 560px;
-  background-position: center;
+  background: #0e1726;
   border: 1px solid var(--border);
   border-radius: 20px;
   box-shadow: var(--shadow);
@@ -215,6 +211,15 @@ footer.site {
   align-items: center;
   justify-content: flex-start;
   overflow-y: auto;
+}
+/* anatomy decks keep the original textured backdrop */
+.cardbox.col-anettermie,
+.cardbox.col-atlas {
+  background:
+    linear-gradient(rgba(14,16,21,.72), rgba(14,16,21,.86)),
+    url("../media/_shared/_ankibackground11.jpg");
+  background-size: cover, 560px;
+  background-position: center;
 }
 .card-side { width: 100%; }
 .answer-divider {
