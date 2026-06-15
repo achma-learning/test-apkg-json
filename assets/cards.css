@@ -183,3 +183,73 @@
 .col-maroc .ghead { font-size: 13px; letter-spacing: .06em; font-weight: 700; margin: 16px 0 4px; }
 .col-maroc .ghead.ci   { color: #ff8585; }
 .col-maroc .ghead.deco { color: #ffb454; }
+
+/* ===========================================================================
+   Shared styling for the decks imported from the Anki Decks Store
+   (cloze deletions, audio/video media, tables). Applies to every card.
+   =========================================================================== */
+
+/* Anki cloze deletions — blue & bold like the desktop app. */
+.card .cloze {
+  color: #5cc8ff;
+  font-weight: 700;
+}
+
+/* Playable media (auscultation sounds, ECG/Europa video clips). */
+.card audio {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 14px auto;
+}
+.card video {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 14px auto;
+  border-radius: 10px;
+  background: #000;
+}
+
+/* Tables (constantes biologiques, pharmaco suffixes…). */
+.card table {
+  border-collapse: collapse;
+  margin: 12px auto;
+  font-size: 16px;
+}
+.card th,
+.card td {
+  border: 1px solid rgba(255, 255, 255, .16);
+  padding: 6px 12px;
+  text-align: left;
+}
+.card th { background: rgba(255, 255, 255, .06); }
+
+/* AnKing cloze note type (Kit Soins Intensifs) ships a hidden editable copy of
+   the cloze field for an add-on; suppress it so the answer isn't shown twice. */
+.editcloze { display: none !important; }
+
+/* ---- Plaques Marocaines: rebuild the licence-plate look (scoped) --------- */
+.col-plaques .plate {
+  display: inline-block;
+  background: #fff;
+  border: 3px solid #222;
+  border-radius: 8px;
+  padding: 10px 40px;
+  margin: 18px auto;
+}
+.col-plaques .plate-inner { display: flex; align-items: center; justify-content: center; }
+.col-plaques .code {
+  font-size: 64px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 4px;
+}
+.col-plaques .hint { font-size: 18px; color: #9aa0a6; margin-top: 10px; font-style: italic; }
+.col-plaques .region { font-size: 32px; font-weight: 700; color: #ff6b6b; margin-top: 15px; }
+.col-plaques hr#answer {
+  border: none;
+  border-top: 2px dashed rgba(255, 255, 255, .25);
+  margin: 15px 0;
+}

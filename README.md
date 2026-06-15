@@ -4,15 +4,31 @@ A small **Anki-style flashcard web app** built from Anki `.apkg` packages.
 Open `index.html`, pick a chapter, and review the cards (with images,
 questions and answers) right in the browser — no Anki needed.
 
-The source decks (in French):
+The source decks (mostly in French) come from the
+[Anki Decks Store](https://achma-learning.github.io/anki-decks/):
 
 | Deck | Cards | Type |
 |------|-------|------|
 | **Anettermie** | 3 436 | Image-occlusion anatomy plates (Netter) |
 | **Atlas photographique (Dissection)** | 1 585 | Image occlusion + clinical Q/A |
 | **Médicaments génériques (Maroc)** | 2 067 | Brand↔DCI recognition / substitution + ANSM drug interactions |
+| **Neurosciences (Neuroanatomie)** | 2 604 | Labelled CNS/PNS plates |
+| **Histologie** | 1 316 | Tissue/organ histology plates |
+| **Constantes Biologiques Usuelles** | 920 | Reference lab values Q/A |
+| **Physiologie** | 822 | System physiology (plates + occlusion) |
+| **ECG — Le deck complet** | 586 | ECG cloze + image cards |
+| **Kit Soins Intensifs** | 433 | AnKing-style cloze (ICU e-learning) |
+| **Iconographie Médicale** | 368 | Anatomopathology images |
+| **Chest X-Ray (Dr HOURI)** | 119 | Thoracic radiology Q/A |
+| **Plaques Marocaines** | 89 | Moroccan plate region codes |
+| **Rx Thorax — Tuberculose (FMPM)** | 64 | TB radiology images |
+| **Pharmaco — Suffixes & Préfixes DCI** | 62 | DCI stem → drug class |
+| **Cas Cliniques d'ECG** | 62 | ECG case images |
+| **Auscultation Pulmonaire** | 37 | **Audio** lung-sound cards |
+| **Fêtes du Maroc** | 30 | Trilingual holidays |
+| **Auscultation Cardiaque** | 23 | **Audio** heart-sound cloze cards |
 
-→ **7 088 cards** across **53 chapters**, with **579 images**.
+→ **18 collections · ~14 600 cards · 356 chapters**, with images, audio and cloze.
 
 ## How it works
 
@@ -21,13 +37,18 @@ the card templates/CSS, and numbered media files. The converter
 (`tools/convert.py`) does the whole pipeline:
 
 1. unzips the package and reads the Anki SQLite collection;
-2. copies every image into `media/<deck>/` (using its real filename);
+2. copies every image into `media/<deck>/` (using its real filename),
+   **downscaling/re-encoding heavy images** for the web (big opaque PNGs become
+   JPEGs) and **pruning media no card references**;
 3. renders each card's **Front/Back HTML** with a faithful subset of Anki's
    mustache template language (`{{Field}}`, `{{#Field}}…{{/Field}}`,
-   `{{^Field}}`, `{{FrontSide}}`, `{{hint:…}}`, special fields like
-   `{{Subdeck}}`), rewrites `<img>` paths and trims empty answer blocks;
+   `{{^Field}}`, `{{FrontSide}}`, `{{hint:…}}`, `{{cloze:…}}`, special fields
+   like `{{Subdeck}}`), turns `[sound:…]` into `<audio>`/`<video>` players,
+   strips template `<script>`, rewrites `<img>` paths (URL-encoding filenames
+   with spaces) and trims empty answer blocks;
 4. writes one data file per deck to `data/<deck>/<deckId>.js`;
-5. writes a global `data/manifest.js` describing every collection/deck tree.
+5. merges a global `data/manifest.js` describing every collection/deck tree
+   (decks whose `.apkg` isn't present locally keep their already-generated data).
 
 The front-end is plain HTML/CSS/JS (no build step, no framework):
 
@@ -75,5 +96,12 @@ Anettermie/Atlas packages are git-ignored under `apkg_src/`, while the Morocco
 package is committed at the repo root) and run:
 
 ```bash
+pip install Pillow      # optional, for image optimisation
 python3 tools/convert.py
 ```
+
+The run is **incremental/merge-based**: any deck whose `.apkg` is missing keeps
+its committed `data/`+`media/`, so you can regenerate just the decks you have
+locally. To pull every source deck from the store, download the `.apkg` files
+(GitHub raw + Google Drive links) into `apkg_src/` — see the `COLLECTIONS` list
+in `tools/convert.py` for the expected filenames.
