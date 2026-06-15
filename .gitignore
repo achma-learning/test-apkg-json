@@ -1,0 +1,7 @@
+# Original Anki packages (large; data + media are generated from them)
+apkg_src/
+
+# OS / editor noise
+.DS_Store
+node_modules/
+*.log
