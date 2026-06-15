@@ -17,6 +17,7 @@ For each .apkg listed in COLLECTIONS:
 Run from the repository root:  python3 tools/convert.py
 """
 
+import hashlib
 import json
 import os
 import re
@@ -30,9 +31,11 @@ DATA_DIR = os.path.join(ROOT, "data")
 MEDIA_DIR = os.path.join(ROOT, "media")
 
 # (apkg file name, url-safe slug, human friendly display name)
+# Source files are looked up in apkg_src/ first, then in the repo root.
 COLLECTIONS = [
     ("Anettermie.apkg", "anettermie", "Anettermie"),
     ("Atlas_photographique_Dissection.apkg", "atlas", "Atlas photographique (Dissection)"),
+    ("v4 medicaments_generiques_maroc (1).apkg", "maroc", "Médicaments génériques (Maroc)"),
 ]
 
 FIELD_SEP = "\x1f"
@@ -181,7 +184,10 @@ def convert_collection(apkg, slug, display):
     if os.path.exists(work):
         shutil.rmtree(work)
     os.makedirs(work)
-    with zipfile.ZipFile(os.path.join(SRC_DIR, apkg)) as z:
+    src = os.path.join(SRC_DIR, apkg)
+    if not os.path.exists(src):
+        src = os.path.join(ROOT, apkg)  # fall back to a package kept in the repo
+    with zipfile.ZipFile(src) as z:
         z.extractall(work)
 
     db_path = os.path.join(work, "collection.anki21")
@@ -237,12 +243,12 @@ def convert_collection(apkg, slug, display):
 
         fields = {f["name"]: (fvals[i] if i < len(fvals) else "")
                   for i, f in enumerate(model["flds"])}
-        # special pseudo-fields
-        fields["Tags"] = tags.strip()
-        fields["Type"] = model["name"]
-        fields["Deck"] = deck_name
-        fields["Subdeck"] = subdeck_leaf(deck_name)
-        fields["Card"] = tmpl["name"]
+        # special pseudo-fields — only when a real field doesn't shadow them
+        # (Anki gives precedence to a note's own field, e.g. a field named "Type")
+        for key, val in (("Tags", tags.strip()), ("Type", model["name"]),
+                         ("Deck", deck_name), ("Subdeck", subdeck_leaf(deck_name)),
+                         ("Card", tmpl["name"])):
+            fields.setdefault(key, val)
 
         front = render(tmpl["qfmt"], fields)
         fields["FrontSide"] = front
@@ -267,22 +273,30 @@ def convert_collection(apkg, slug, display):
             fh.write("DECKDATA[%d]=%s;" % (did, json.dumps(payload, ensure_ascii=False)))
 
     # --- build deck list (with own + total-including-subdecks counts) -------
-    deck_list = []
-    name_by_id = {int(did): d["name"] for did, d in decks.items()}
-    for did, d in decks.items():
-        did = int(did)
-        name = d["name"]
-        if name == "Default" and own_count.get(did, 0) == 0:
+    # Leaves = decks that actually hold cards. Some packages only define those
+    # leaf decks, so we also synthesize every implicit parent so the tree nests.
+    id_by_name = {d["name"]: int(did) for did, d in decks.items()}
+    leaves = {decks[str(did)]["name"]: cnt for did, cnt in own_count.items()}
+    node_names = set()
+    for name in leaves:
+        if name == "Default":
             continue
-        own = own_count.get(did, 0)
-        # total = own + all descendants (deck names prefixed with "name::")
-        total = own
+        parts = name.split("::")
+        for i in range(1, len(parts) + 1):
+            node_names.add("::".join(parts[:i]))
+
+    deck_list = []
+    for name in node_names:
+        own = leaves.get(name, 0)
         prefix = name + "::"
-        for other_id, other_name in name_by_id.items():
-            if other_name.startswith(prefix):
-                total += own_count.get(other_id, 0)
+        total = own + sum(c for n, c in leaves.items()
+                          if n != name and n.startswith(prefix))
         if total == 0:
             continue
+        if name in id_by_name:
+            did = id_by_name[name]                      # real deck id
+        else:
+            did = "g" + hashlib.md5((slug + "::" + name).encode()).hexdigest()[:12]
         deck_list.append({"id": did, "name": name, "own": own, "total": total})
     deck_list.sort(key=lambda x: x["name"])
     print("  decks with cards: %d" % len([d for d in deck_list if d["own"] > 0]))

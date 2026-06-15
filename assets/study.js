@@ -18,6 +18,9 @@
   if (!deckEntry) { fatal("Deck introuvable."); return; }
 
   document.title = leafName(deckEntry.name) + " — FlashAnat";
+  // tag the card elements with the collection so the right styling applies
+  sideEl.className = "card-side card col-" + col;
+  $("cardbox").className = "cardbox col-" + col;
   breadcrumbEl.innerHTML = deckEntry.name.split("::")
     .map(function (p, i, a) { return i === a.length - 1 ? "<b>" + esc(p) + "</b>" : esc(p); })
     .join(" <span style='opacity:.5'>›</span> ");

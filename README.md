@@ -1,17 +1,18 @@
 # FlashAnat — Anki decks as a browser flashcard site
 
-A small **Anki-style flashcard web app** built from two Anki `.apkg` packages.
+A small **Anki-style flashcard web app** built from Anki `.apkg` packages.
 Open `index.html`, pick a chapter, and review the cards (with images,
 questions and answers) right in the browser — no Anki needed.
 
-The two source decks (anatomy, in French):
+The source decks (in French):
 
 | Deck | Cards | Type |
 |------|-------|------|
 | **Anettermie** | 3 436 | Image-occlusion anatomy plates (Netter) |
 | **Atlas photographique (Dissection)** | 1 585 | Image occlusion + clinical Q/A |
+| **Médicaments génériques (Maroc)** | 2 067 | Brand↔DCI recognition / substitution + ANSM drug interactions |
 
-→ **5 021 cards** across **49 chapters**, with **579 images**.
+→ **7 088 cards** across **53 chapters**, with **579 images**.
 
 ## How it works
 
@@ -68,8 +69,10 @@ deploys as-is to GitHub Pages.
 
 ## Regenerating the data
 
-Place the two `.apkg` files in `apkg_src/` (they are git-ignored to keep the
-repo small) and run:
+Put the `.apkg` files where the converter looks for them (each entry in
+`COLLECTIONS` is searched first in `apkg_src/`, then in the repo root — the
+Anettermie/Atlas packages are git-ignored under `apkg_src/`, while the Morocco
+package is committed at the repo root) and run:
 
 ```bash
 python3 tools/convert.py

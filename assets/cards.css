@@ -104,3 +104,82 @@
   font-size: 15px;
 }
 .hint-content { color: #cdd1d6; font-size: 15px; }
+
+/* ===========================================================================
+   "Médicaments génériques (Maroc)" note types — scoped to .col-maroc so the
+   styling stays isolated from the anatomy decks. Kept faithful to the deck's
+   original (clean) CSS: brand / DCI recognition, substitution, ANSM
+   interactions (contre-indiqué / déconseillé), and A+B pair interactions.
+   =========================================================================== */
+.col-maroc.card {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  color: #e7ecf3;
+  background: #0e1726;
+  padding: 22px 16px;
+  line-height: 1.5;
+  border-radius: 14px;
+}
+.col-maroc .label {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: #7d8aa3; margin-bottom: 10px;
+}
+.col-maroc .brand { font-size: 30px; font-weight: 800; color: #fff; letter-spacing: .01em; }
+.col-maroc .reg { font-size: .62em; vertical-align: super; color: #9fb0c9; font-weight: 600; }
+.col-maroc .molecule { font-size: 27px; font-weight: 800; color: #7ee0c2; }
+.col-maroc .dose { font-size: 15px; color: #9fb0c9; margin-top: 6px; }
+.col-maroc .q { font-size: 16px; color: #c3cee0; margin-top: 18px; }
+.col-maroc hr { border: none; border-top: 1px solid #243049; margin: 18px 0; }
+.col-maroc .badge {
+  display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 11px;
+  border-radius: 999px; margin: 4px 4px 0; letter-spacing: .03em;
+}
+.col-maroc .b-princeps { background: #3a2e07; color: #ffd564; border: 1px solid #6b5410; }
+.col-maroc .b-innov    { background: #06302e; color: #5fe3d2; border: 1px solid #0d5a54; }
+.col-maroc .b-biosim   { background: #2a1140; color: #caa1ff; border: 1px solid #5a2b8c; }
+.col-maroc .b-gen      { background: #0c2e1a; color: #69e08f; border: 1px solid #145c33; }
+.col-maroc .b-route    { background: #10243f; color: #86b6ff; border: 1px solid #1e4576; }
+.col-maroc .section {
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: #7d8aa3; margin: 16px 0 8px;
+}
+.col-maroc .princeps-line { font-size: 21px; font-weight: 800; color: #ffd564; }
+.col-maroc .gen-list { font-size: 18px; color: #cdd8ea; }
+.col-maroc .gen-list .pill {
+  display: inline-block; background: #16223a; border: 1px solid #243049;
+  border-radius: 8px; padding: 3px 10px; margin: 4px 3px;
+}
+.col-maroc .sib { font-size: 15px; color: #9fb0c9; }
+.col-maroc .sib .pill {
+  display: inline-block; background: #16223a; border-radius: 7px;
+  padding: 2px 9px; margin: 3px;
+}
+.col-maroc .foot { font-size: 11px; color: #5d6982; margin-top: 18px; }
+.col-maroc .foot a { color: #86b6ff; text-decoration: none; }
+.col-maroc .count { font-size: 13px; color: #7d8aa3; }
+.col-maroc .sev {
+  display: inline-block; font-size: 15px; font-weight: 800; padding: 7px 16px;
+  border-radius: 10px; letter-spacing: .04em;
+}
+.col-maroc .sev-ci   { background: #3a0d0d; color: #ff8585; border: 1px solid #7a1d1d; }
+.col-maroc .sev-deco { background: #3a2407; color: #ffb454; border: 1px solid #7a4d10; }
+.col-maroc .meca { font-size: 16px; color: #e7ecf3; margin-top: 14px; }
+.col-maroc .cat {
+  font-size: 14px; color: #c3cee0; background: #10243f; border: 1px solid #1e4576;
+  border-radius: 10px; padding: 11px 14px; margin-top: 12px; text-align: left;
+}
+.col-maroc .cat .lab {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: #86b6ff; display: block; margin-bottom: 5px;
+}
+.col-maroc .grp { text-align: left; margin-top: 6px; }
+.col-maroc .grp .pill {
+  display: inline-block; background: #16223a; border: 1px solid #243049;
+  border-radius: 8px; padding: 3px 10px; margin: 4px 3px; font-size: 14px;
+}
+.col-maroc .grp.ci .pill   { border-color: #7a1d1d; color: #ff9a9a; background: #280a0a; }
+.col-maroc .grp.deco .pill { border-color: #7a4d10; color: #ffc278; background: #281a06; }
+.col-maroc .ghead { font-size: 13px; letter-spacing: .06em; font-weight: 700; margin: 16px 0 4px; }
+.col-maroc .ghead.ci   { color: #ff8585; }
+.col-maroc .ghead.deco { color: #ffb454; }
