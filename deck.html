@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Révision — FlashAnat</title>
+  <link rel="stylesheet" href="assets/app.css" />
+  <link rel="stylesheet" href="assets/cards.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="index.html" style="text-decoration:none">
+        <span class="logo">🧠</span>
+        <div>FlashAnat</div>
+      </a>
+      <span class="spacer"></span>
+      <a class="back" href="index.html">← Tous les decks</a>
+    </div>
+  </header>
+
+  <main class="wrap study">
+    <div class="study-head">
+      <div class="breadcrumb" id="breadcrumb">Chargement…</div>
+      <div class="progress"><span id="progressbar"></span></div>
+      <div class="study-stats">
+        <span class="pill"><span class="dot blue"></span><span id="pos">0 / 0</span></span>
+        <span class="pill"><span class="dot green"></span><span id="known">0 acquises</span></span>
+        <span class="pill"><span class="dot red"></span><span id="review">0 à revoir</span></span>
+        <span class="spacer"></span>
+        <span class="tool" id="t-skip" title="Masquer les cartes déjà acquises">Cacher acquises</span>
+        <span class="tool" id="t-shuffle" title="Mélanger l'ordre">Mélanger</span>
+        <span class="tool" id="t-restart" title="Recommencer la session">Recommencer</span>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="cardbox" id="cardbox">
+        <div class="card-side card" id="side"></div>
+      </div>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="lightbox" id="lightbox"><img id="lightbox-img" alt="" /></div>
+
+  <script src="data/manifest.js"></script>
+  <script src="assets/study.js"></script>
+</body>
+</html>
