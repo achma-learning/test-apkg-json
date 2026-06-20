@@ -60,6 +60,7 @@ COLLECTIONS = [
     ("ecg_complet.apkg", "ecg", "ECG — Le deck complet"),
     ("cas_cliniques_ecg.apkg", "ecg-cas", "Cas Cliniques d'ECG"),
     ("histologie.apkg", "histologie", "Histologie"),
+    ("catheters_osmosis_v6.apkg", "catheters", "Cathéters Veineux Périphériques (Osmosis)"),
 ]
 
 FIELD_SEP = "\x1f"
