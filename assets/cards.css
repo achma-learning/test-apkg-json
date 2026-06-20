@@ -18,6 +18,10 @@
 
 .card img {
   max-width: 100%;
+  /* fit a plate inside the viewport so a single image never needs scrolling;
+     bumped up in immersive/fullscreen mode (see app.css). Click to zoom for detail. */
+  max-height: var(--img-fit, 70vh);
+  width: auto;
   height: auto;
   border-radius: 10px;
   background: #fff;       /* anatomy plates look best on white matte */
@@ -206,6 +210,7 @@
   display: block;
   width: 100%;
   max-width: 640px;
+  max-height: var(--img-fit, 70vh);
   height: auto;
   margin: 14px auto;
   border-radius: 10px;

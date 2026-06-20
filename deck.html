@@ -24,14 +24,33 @@
     <div class="study-head">
       <div class="breadcrumb" id="breadcrumb">Chargement…</div>
       <div class="progress"><span id="progressbar"></span></div>
+      <div class="autobar" id="autobar" aria-hidden="true"><span id="autobar-fill"></span></div>
       <div class="study-stats">
         <span class="pill"><span class="dot blue"></span><span id="pos">0 / 0</span></span>
         <span class="pill"><span class="dot green"></span><span id="known">0 acquises</span></span>
         <span class="pill"><span class="dot red"></span><span id="review">0 à revoir</span></span>
         <span class="spacer"></span>
+        <span class="tool" id="t-auto" title="Lecture automatique : la carte avance seule, comme Anki (A)">▶ Lecture auto</span>
+        <span class="tool icon" id="t-auto-cfg" title="Régler les minuteurs d'auto-avance" aria-haspopup="true">⚙</span>
+        <span class="tool icon" id="t-full" title="Plein écran (F)">⛶</span>
         <span class="tool" id="t-skip" title="Masquer les cartes déjà acquises">Cacher acquises</span>
         <span class="tool" id="t-shuffle" title="Mélanger l'ordre">Mélanger</span>
         <span class="tool" id="t-restart" title="Recommencer la session">Recommencer</span>
+      </div>
+
+      <div class="auto-pop" id="auto-pop" hidden>
+        <div class="auto-pop-title">Lecture automatique</div>
+        <div class="auto-pop-row">
+          <label for="auto-q">Question</label>
+          <input id="auto-q" type="number" min="1" max="600" step="1" inputmode="numeric" />
+          <span class="unit">s</span>
+        </div>
+        <div class="auto-pop-row">
+          <label for="auto-a">Réponse</label>
+          <input id="auto-a" type="number" min="1" max="600" step="1" inputmode="numeric" />
+          <span class="unit">s</span>
+        </div>
+        <p class="auto-pop-note">La réponse s'affiche après le délai « Question », puis la carte suivante après le délai « Réponse ».</p>
       </div>
     </div>
 
@@ -43,6 +62,8 @@
 
     <div class="controls" id="controls"></div>
   </main>
+
+  <div class="fs-hint" id="fs-hint">Plein écran — appuyez sur F ou Échap pour quitter</div>
 
   <div class="lightbox" id="lightbox"><img id="lightbox-img" alt="" /></div>
 
