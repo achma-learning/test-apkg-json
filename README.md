@@ -27,8 +27,9 @@ The source decks (mostly in French) come from the
 | **Auscultation Pulmonaire** | 37 | **Audio** lung-sound cards |
 | **Fêtes du Maroc** | 30 | Trilingual holidays |
 | **Auscultation Cardiaque** | 23 | **Audio** heart-sound cloze cards |
+| **Cathéters Veineux (Osmosis)** | 15 | IV catheter gauge ↔ couleur ↔ débit reference + cheatsheet |
 
-→ **18 collections · ~14 600 cards · 356 chapters**, with images, audio and cloze.
+→ **19 collections · ~14 640 cards · 357 chapters**, with images, audio and cloze.
 
 ## How it works
 

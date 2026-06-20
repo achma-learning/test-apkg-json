@@ -107,6 +107,26 @@ a:hover { text-decoration: underline; }
 }
 .collection-head .studyall:hover { text-decoration: none; filter: brightness(1.08); }
 
+/* expand / collapse-all toolbar above the deck lists */
+.list-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 4px 4px;
+}
+.tree-toggle {
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 14px;
+  transition: color .12s ease, border-color .12s ease;
+}
+.tree-toggle:hover { color: var(--text); border-color: var(--accent); }
+
 .tree { list-style: none; margin: 0; padding: 0; }
 .node-row {
   display: flex;

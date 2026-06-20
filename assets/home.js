@@ -149,4 +149,20 @@
     // keep all groups expanded while searching
     container.querySelectorAll(".children").forEach(function (c) { c.style.display = ""; });
   });
+
+  // --- expand / collapse every group at once ----------------------------
+  var toggleAllBtn = document.getElementById("toggle-all");
+  if (toggleAllBtn) {
+    toggleAllBtn.addEventListener("click", function () {
+      // collapse when currently expanded, otherwise expand everything
+      var collapse = toggleAllBtn.getAttribute("aria-expanded") !== "false";
+      container.querySelectorAll(".children").forEach(function (ul) {
+        ul.classList.toggle("hidden", collapse);
+        var row = ul.previousElementSibling; // the .node-row that owns this group
+        if (row && row.classList.contains("node-row")) row.classList.toggle("collapsed", collapse);
+      });
+      toggleAllBtn.setAttribute("aria-expanded", collapse ? "false" : "true");
+      toggleAllBtn.textContent = collapse ? "Tout déplier" : "Tout replier";
+    });
+  }
 })();
